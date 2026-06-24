@@ -1,0 +1,46 @@
+NOTE: Redirects are currently not supported in Windows or MacOs.
+C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\launch.py:181: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use-env is set by default in torchrun.
+If your script expects `--local-rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+[W C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\torch\csrc\distributed\c10d\socket.cpp:601] [c10d] The client socket has failed to connect to [kubernetes.docker.internal]:29500 (system error: 10049 - ‘⁄∆‰…œœ¬Œƒ÷–£¨∏√«Î«Ûµƒµÿ÷∑Œﬁ–ß°£).
+[W C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\torch\csrc\distributed\c10d\socket.cpp:601] [c10d] The client socket has failed to connect to [kubernetes.docker.internal]:29500 (system error: 10049 - ‘⁄∆‰…œœ¬Œƒ÷–£¨∏√«Î«Ûµƒµÿ÷∑Œﬁ–ß°£).
+[W C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\torch\csrc\distributed\c10d\socket.cpp:601] [c10d] The client socket has failed to connect to [kubernetes.docker.internal]:29500 (system error: 10049 - ‘⁄∆‰…œœ¬Œƒ÷–£¨∏√«Î«Ûµƒµÿ÷∑Œﬁ–ß°£).
+[W C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\torch\csrc\distributed\c10d\socket.cpp:601] [c10d] The client socket has failed to connect to [kubernetes.docker.internal]:29500 (system error: 10049 - ‘⁄∆‰…œœ¬Œƒ÷–£¨∏√«Î«Ûµƒµÿ÷∑Œﬁ–ß°£).
+[2026-05-19 17:35:01] [INFO]: {'enable_float16': False, 'restore_ckpt_strict': True, 'restore_hint': './output/MyClassification/GaitSet/GaitSet_Finetune_05/checkpoints/GaitSet_Finetune_05-06000.pt', 'save_name': 'GaitSet_Finetune', 'eval_func': 'evaluate_scoliosis', 'sampler': {'batch_size': 1, 'sample_type': 'all_ordered', 'type': 'InferenceSampler', 'batch_shuffle': False, 'frames_all_limit': 720}, 'transform': [{'type': 'BaseSilCuttingTransform'}], 'metric': 'euc', 'cross_view_gallery': False, 'label_mapping': {'003': 0, '004': 1, '005': 2}}
+[2026-05-19 17:35:01] [INFO]: {'model': 'GaitSet', 'in_channels': [1, 32, 64, 128], 'SeparateFCs': {'in_channels': 128, 'out_channels': 256, 'parts_num': 62}, 'SeparateBNNecks': {'class_num': 3, 'in_channels': 256, 'parts_num': 62}, 'bin_num': [16, 8, 4, 2, 1]}
+[2026-05-19 17:35:01] [INFO]: {'dataset_name': 'MyClassification', 'dataset_root': 'D:/Downloads/Anonymous-pkl', 'num_workers': 2, 'dataset_partition': './datasets/Anonymous/train_test.json', 'remove_no_gallery': False, 'cache': False, 'test_dataset_name': 'MyClassification', 'data_structure': 'class'}
+[2026-05-19 17:35:01] [INFO]: [DEBUG] data_structure: class
+[2026-05-19 17:35:01] [INFO]: [DEBUG] dataset_root: D:/Downloads/Anonymous-pkl
+[2026-05-19 17:35:01] [INFO]: [DEBUG] partition labels: ['S01_T01', 'S02_T01', 'S03_T01', 'S04_T01', 'S05_T01', 'S06_T01', 'S07_T01', 'S08_T01', 'S09_T01', 'S10_T01', 'S11_T01', 'S12_T01', 'S13_T01', 'S14_T01', 'S15_T01', 'S16_T01', 'S17_T01', 'S18_T01', 'S19_T01', 'S20_T01', 'S21_T01', 'S22_T01', 'S23_T01', 'S24_T01', 'S25_T01', 'S26_T01', 'S27_T01', 'S28_T01', 'S29_T01', 'S30_T01']
+[2026-05-19 17:35:01] [INFO]: [DEBUG] label_list (from dirs): ['S01_T01', 'S02_T01', 'S03_T01', 'S04_T01', 'S05_T01', 'S06_T01', 'S07_T01', 'S08_T01', 'S09_T01', 'S10_T01']...
+[2026-05-19 17:35:01] [INFO]: [DEBUG] filtered train_set: ['S01_T01', 'S02_T01', 'S03_T01', 'S04_T01', 'S05_T01', 'S06_T01', 'S07_T01', 'S08_T01', 'S09_T01', 'S10_T01', 'S11_T01', 'S12_T01', 'S13_T01', 'S14_T01', 'S15_T01', 'S16_T01', 'S17_T01', 'S18_T01', 'S19_T01', 'S20_T01', 'S21_T01', 'S22_T01', 'S23_T01', 'S24_T01', 'S25_T01', 'S26_T01', 'S27_T01', 'S28_T01', 'S29_T01', 'S30_T01']
+[2026-05-19 17:35:01] [INFO]: -------- Test Pid List --------
+[2026-05-19 17:35:01] [INFO]: ['S05_T01']
+[2026-05-19 17:35:01] [INFO]: Restore Parameters from ./output/MyClassification/GaitSet/GaitSet_Finetune_05/checkpoints/GaitSet_Finetune_05-06000.pt !!!
+[2026-05-19 17:35:01] [INFO]: Parameters Count: 2.67395M
+[2026-05-19 17:35:01] [INFO]: Model Initialization Finished!
+Transforming:   0%|          | 0/9 [00:00<?, ?it/s]Transforming:  11%|‚ñà         | 1/9 [00:04<00:37,  4.69s/it]Transforming:  67%|‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñã   | 6/9 [00:04<00:01,  1.68it/s][0m[0mTransforming: 100%|‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà| 9/9 [00:05<00:00,  1.73it/s]
+[2026-05-19 17:35:06] [INFO]: [DEBUG] data keys: ['embeddings', 'labels', 'types', 'views']
+[2026-05-19 17:35:06] [INFO]: [DEBUG] labels (types) unique: ['004']
+[2026-05-19 17:35:06] [INFO]: [DEBUG] labels count: 9
+[2026-05-19 17:35:06] [INFO]: [DEBUG] logits shape: (9, 3, 62)
+[2026-05-19 17:35:06] [INFO]: [DEBUG] first 5 labels: ['004', '004', '004', '004', '004']
+[2026-05-19 17:35:06] [INFO]: [DEBUG] first 5 predictions: [1 1 1 1 2]
+[2026-05-19 17:35:06] [INFO]: Using fixed label mapping from config: {'003': 0, '004': 1, '005': 2, 3: 0, 4: 1, 5: 2}
+[2026-05-19 17:35:06] [INFO]: ========== Classification Results ==========
+[2026-05-19 17:35:06] [INFO]: Total Accuracy: 88.89%
+[2026-05-19 17:35:06] [INFO]: Macro-avg Precision: 50.00%
+[2026-05-19 17:35:06] [INFO]: Macro-avg Recall: 44.44%
+[2026-05-19 17:35:06] [INFO]: Macro-avg F1 Score: 47.06%
+[2026-05-19 17:35:06] [INFO]: ========== Confusion Matrix ==========
+[2026-05-19 17:35:06] [INFO]: Classes: ['004']
+[2026-05-19 17:35:06] [INFO]: [[0 0 0]
+ [0 8 1]
+ [0 0 0]]
+[0m[0m

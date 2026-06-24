@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\launch.py", line 150, in <module>
+    from torch.distributed.run import get_args_parser, run
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\run.py", line 381, in <module>
+    from torch.distributed.elastic.multiprocessing import Std
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\elastic\multiprocessing\__init__.py", line 69, in <module>
+    from torch.distributed.elastic.multiprocessing.api import (  # noqa: F401
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\elastic\multiprocessing\api.py", line 25, in <module>
+    from torch.distributed.elastic.multiprocessing.errors import ProcessFailure, record
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\elastic\multiprocessing\errors\__init__.py", line 70, in <module>
+    log = get_logger()
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\elastic\utils\logging.py", line 32, in get_logger
+    return _setup_logger(name or _derive_module_name(depth=2))
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\site-packages\torch\distributed\elastic\utils\logging.py", line 49, in _derive_module_name
+    stack = inspect.stack()
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\inspect.py", line 1554, in stack
+    return getouterframes(sys._getframe(1), context)
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\inspect.py", line 1531, in getouterframes
+    frameinfo = (frame,) + getframeinfo(frame, context)
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\inspect.py", line 1505, in getframeinfo
+    lines, lnum = findsource(frame)
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\inspect.py", line 829, in findsource
+    module = getmodule(object, file)
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\inspect.py", line 755, in getmodule
+    os.path.realpath(f)] = module.__name__
+  File "C:\Users\86158\anaconda3\envs\OpenGait\lib\ntpath.py", line 636, in realpath
+    if _getfinalpathname(spath) == path:
+KeyboardInterrupt
+[0m^C

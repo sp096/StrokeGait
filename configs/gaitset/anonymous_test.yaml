@@ -1,0 +1,171 @@
+data_cfg:
+  dataset_name: MyClassification
+  dataset_root: D:/Downloads/Anonymous-pkl           # 修改为你的数据集路径
+  dataset_partition: ./datasets/Anonymous/train_test.json  # 修改为你的分区文件
+
+  num_workers: 2
+  remove_no_gallery: false
+  test_dataset_name: MyClassification
+  data_structure: class    # 数据格式: 类别名/身份ID/视角/帧 或 类别名/身份ID/样本/视角/帧
+
+evaluator_cfg:
+  restore_hint: ./output/MyClassification/GaitSet/GaitSet_Finetune_23/checkpoints/GaitSet_Finetune_23-06000.pt
+  save_name: GaitSet_Finetune
+  eval_func: evaluate_scoliosis    # 分类评估函数
+  label_mapping:                   # 固定标签映射
+    "003": 0
+    "004": 1
+    "005": 2
+  sampler:
+    batch_shuffle: false
+    batch_size: 1    
+    sample_type: all_ordered
+    type: InferenceSampler
+    frames_all_limit: 720
+  metric: euc
+  transform:
+    - type: BaseSilCuttingTransform
+
+model_cfg:
+  model: GaitSet
+  in_channels:
+    - 1
+    - 32
+    - 64
+    - 128
+  SeparateFCs:
+    in_channels: 128
+    out_channels: 256
+    parts_num: 62
+  SeparateBNNecks:               
+    class_num: 3                  
+    in_channels: 256
+    parts_num: 62
+  bin_num:
+    - 16
+    - 8
+    - 4
+    - 2
+    - 1
+
+loss_cfg:
+  - loss_term_weight: 0.0
+    margin: 0.2
+    type: TripletLoss
+    log_prefix: triplet
+  - loss_term_weight: 1.0
+    scale: 16
+    type: CrossEntropyLoss
+    log_prefix: softmax
+    log_accuracy: true
+    #weight: [1.0, 1.0, 1.0]         
+    weight: [8.0, 0.556, 8.1]
+    label_smooth: true
+    eps: 0.1
+
+optimizer_cfg:
+  lr: 0.01
+  momentum: 0.9
+  solver: SGD
+  weight_decay: 0.0005
+
+scheduler_cfg:
+  gamma: 0.1
+  milestones:
+    - 4000
+    - 5000
+  scheduler: MultiStepLR
+
+trainer_cfg:
+  enable_float16: true
+  fix_BN: false
+  with_test: false
+  log_iter: 100
+  restore_ckpt_strict: false     
+  restore_hint: ./output/CASIA-B/GaitSet/GaitSet/checkpoints/GaitSet-40000.pt
+  optimizer_reset: true           
+  scheduler_reset: true            
+  save_iter: 3000
+  save_name: Gaitset_Finetune_01
+  sync_BN: false
+  total_iter: 6000
+  label_mapping:                  
+    "003": 0
+    "004": 1
+    "005": 2
+  sampler:
+    batch_shuffle: true
+    batch_size: 4
+    frames_num_fixed: 40
+    frames_num_max: 100
+    frames_num_min: 5
+    frames_skip_num: 1
+    sample_type: fixed_ordered
+    # 启用不平衡采样: type: ImbalancedSampler
+    # 停用不平衡采样: type: CommonSampler
+    type: ImbalancedSampler
+    # 可选: RandomOverSampler | RandomUnderSampler | TomekLinks
+    # 当前: TomekLinks（多数类边界清洗）
+    # 说明: 若上面 type=CommonSampler，下方 sampling_method/sampling_params 会被忽略。
+    sampling_method: TomekLinks
+    sampling_params:
+      sampling_strategy: auto
+      # 仅对支持 random_state 的方法生效（如 RandomOverSampler）
+      random_state: 0
+  feature_smote:
+    # 启用: enabled: true
+    # 停用: enabled: false（完全关闭本段功能）
+    enabled: true
+    target: softmax            
+    sampling_strategy: auto
+    k_neighbors: 1
+    fallback: RandomOverSampler
+    random_state: 0
+    safe_mode: true
+    normalize_embeddings: true
+    clamp_value: 5.0
+    min_samples_for_smote: 2
+    nan_to_num: true
+    # 可选: smote | random_over | interpolate | tomek | smote_tomek
+    # 含义:
+    # - smote: 标准 SMOTE 合成
+    # - tomek: 仅 TomekLinks 清洗
+    # - smote_tomek: 先 SMOTE 再 Tomek 清洗
+    mode: smote
+    max_synthetic_per_class: 16
+    # 合成比例（0..1），用于控制合成量；1.0 表示补齐到多数类数
+    synthetic_ratio: 0.5
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: BaseSilCuttingTransform
+        # - type: RandomHorizontalFlip
+        #   prob: 0.5
+        - type: RandomSpatialCropPad
+          prob: 0.25
+          crop_ratio: [0.92, 1.0]
+        - type: RandomTemporalJitter
+          prob: 0.25
+          max_offset: 2
+        - type: RandomFrameDrop
+          prob: 0.20
+          drop_ratio: [0.05, 0.12]
+        - type: RandomRotate
+          prob: 0.15
+          degree: 8
+        - type: RandomGaussianNoise
+          prob: 0.20
+          std: 0.01
+        - type: RandomPartDilate
+          prob: 0.15
+          top_range: [12, 18]
+          bot_range: [34, 42]
+        - type: RandomPartBlur
+          prob: 0.15
+          top_range: [9, 20]
+          bot_range: [29, 40]
+        - type: RandomErasing
+          prob: 0.20
+          sl: 0.03
+          sh: 0.12
+          r1: 0.3
